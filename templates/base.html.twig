@@ -2,11 +2,16 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}The Nuum Blog{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('build/style.css') }}">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+    {% include "navbar.html.twig" %}
+    <div class="container p-4">
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+    </div>
+    <script src="{{ asset('build/app.js') }}"></script>
+    {% block javascripts %}{% endblock %}
     </body>
 </html>

@@ -1,0 +1,27 @@
+<ul class="mt-2 nav justify-content-center align-items-center">
+
+
+    <li class="nav-item">
+        {# On force la hauteur de l'image directement sur l'élément - ici le style fait partie intégrante du contenu ! #}
+        <a class="nav-link active" href="{{ path('home') }}">
+            <img style="max-height: 4em;" src="{{ asset('build/logo.svg') }}" alt="Logo du site" />
+        </a>
+    </li>
+
+    {# Si l'utilisateur n'est pas connecté #}
+    {% if app.user == null %}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+        </li>
+        
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+        </li>
+
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+        </li>
+
+    {% endif %}
+</ul>
