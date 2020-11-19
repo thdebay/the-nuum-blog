@@ -1,14 +1,16 @@
 <ul class="mt-2 nav justify-content-center align-items-center">
 
-
     <li class="nav-item">
         {# On force la hauteur de l'image directement sur l'élément - ici le style fait partie intégrante du contenu ! #}
-        <a class="nav-link active" href="{{ path('home') }}">
+        <a class="nav-link" href="{{ path('home') }}">
             <img style="max-height: 4em;" src="{{ asset('build/logo.svg') }}" alt="Logo du site" />
         </a>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('home') }}">Accueil</a>
+        </li>
     </li>
 
-    {# Si l'utilisateur n'est pas connecté #}
+    {# Si l'utilisateur n'est pas connecté... #}
     {% if app.user == null %}
         <li class="nav-item">
             <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
@@ -18,7 +20,16 @@
             <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
         </li>
 
+    {# Les utilisateurs connectés ont accès à des fonctionnalités différentes : #}
     {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('article_index') }}">Mes articles</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('article_new') }}">Écrire un article</a>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
         </li>

@@ -6,11 +6,33 @@
 <div class="text-center">
     <h1>Bienvenue sur <i>The Nuum Blog</i> !</h1>
     {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        <div class="alert alert-success" role="alert">
+            Bonjour {{ app.user.name }} 😃
         </div>
     {% else %}
-        <p>Vous n'êtes pas connecté(e). Connectez-vous ou créez un compte pour accéder à l'ensemble du contenu ! 😃</p>
+        <div class="alert alert-info" role="alert">
+            Vous n'êtes pas connecté(e). Vous pouvez accéder au contenu librement, mais vous devrez vous connecter pour laisser des commentaires ou publier des articles.
+        </div>
     {% endif %}
+</div>
+
+<div class="row">
+
+{% for article in articles %}
+<div class="col-md-4 mt-4">
+    <div class="card" style="max-width: 18em;">
+        {% if article.featuredImage %}
+            <img src="{{ path('articles/') }}" class="card-img-top" alt="Image illustrative">
+        {% else %}
+            <img src="{{ "https://picsum.photos/seed/#{article.slug}/200" }}" class="card-img-top" alt="Une image au hasard">
+        {% endif %}
+        <div class="card-body">
+            <h5 class="card-title">{{ article.titre }}</h5>
+            <p>Publié le {{ article.createdAt }} par {{ article.user.name }}</p>
+            <a href="{{ path('article_show', {'id': article.id}) }}" class="btn btn-primary">Lire</a>
+        </div>
+    </div>
+</div>
+{% endfor %}
 </div>
 {% endblock %}

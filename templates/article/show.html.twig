@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The Nuum Blog - {{ article.titre }}{% endblock %}
+
+{% block body %}
+    <h1>{{ article.titre }}</h1>
+    <p>Publié le {{ article.createdAt }}
+
+    {# Si l'article a été mis à jour par la suite, l'afficher #}
+    {% if article.updatedAt and article.createdAt != article.updatedAt %}
+    (mis à jour le {{ article.updatedAt }})
+    {% endif %}
+
+    par {{ article.user.name }}
+    
+    
+    <p>{{ article.contenu }}</p>
+
+
+    <a href="{{ path('home') }}">Retour à l'accueil</a>
+
+{% endblock %}

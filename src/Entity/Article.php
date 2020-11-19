@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Carbon\Carbon;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
@@ -36,6 +37,27 @@ class Article
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $featured_image;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $created_at;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updated_at;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="article")
+     */
+    private $categorie;
 
     public function getId(): ?int
     {
@@ -86,6 +108,55 @@ class Article
     public function setFeaturedImage(?string $featured_image): self
     {
         $this->featured_image = $featured_image;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): string
+    {
+        // on définit le format d'affichage de la date pour retourner une chaine de caractères directement
+        return Carbon::parse($this->created_at)->locale('fr')->isoFormat('dddd Do MMMM YYYY à hh\hmm');
+    }
+
+    public function setCreatedAt(?\DateTimeInterface $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }
