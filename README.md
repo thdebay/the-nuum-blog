@@ -1,6 +1,8 @@
 # About
 This is an educational project made for demonstration purposes.
 
+https://user-images.githubusercontent.com/1422621/99723298-47ad0a00-2ab2-11eb-935e-08d1b620e287.png
+
 ## Installation
 
 Git clone or download zip and extract it.
