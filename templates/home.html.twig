@@ -26,7 +26,7 @@
 
 {% for article in articles %}
 <div class="col-md-4 mt-4">
-    <div class="card">
+    <div class="card" style="height: 100%;"> {# force the card to fill the entire row height #}
         <a href="{{ path('article_show', {'id': article.id}) }}">
             {% if article.featuredImage %}
                 <img src="{{ article.getFeaturedImage }}" class="card-img-top post-image" alt="Image illustrative">

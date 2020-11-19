@@ -20,16 +20,25 @@ class CommentaireController extends AbstractController
     public function store(EntityManagerInterface $em, ArticleRepository $articleRepository, Request $request): Response
     {
         if ($request->isMethod('POST')) {
+            // récupérer l'article auquel on veut associer le commentaire
+            $article = $articleRepository->find($request->request->get('article_id'));
+
+            // vérifier que le formulaire comporte les informations requises
             if ($request->request->count() > 0) {
                 $commentaire = new Commentaire();
-                $commentaire->setPseudo($request->request->get('commentaire')['pseudo'])
+
+                // FIXME - we shouldn't need to retrieve the authenticated user name here.
+                // However, it is not included in the request when the form is submitted, because we have disabled the field when the user is logged in
+                $commentaire->setPseudo($request->request->get('commentaire')['pseudo'] ?? $this->getUser()->getName())
                             ->setContenu($request->request->get('commentaire')['contenu'])
                             ->setCreatedAt(new \DateTime())
-                            ->setArticle($articleRepository->find($request->request->get('article_id')));
+                            ->setArticle($article);
                 $em->persist($commentaire);
                 $em->flush();
             }
-            return $this->redirectToRoute('home');
+
+            // rediriger vers la page de l'article (rafraichir)
+            return $this->redirectToRoute('article_show', ['id' => $article->getId()]);
         }
     }
 }

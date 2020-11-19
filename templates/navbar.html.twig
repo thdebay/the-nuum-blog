@@ -1,9 +1,8 @@
 <ul class="mt-2 nav justify-content-center align-items-center">
 
     <li class="nav-item">
-        {# On force la hauteur de l'image directement sur l'élément - ici le style fait partie intégrante du contenu ! #}
         <a class="nav-link" href="{{ path('home') }}">
-            <img style="max-height: 4em;" src="{{ asset('build/logo.svg') }}" alt="Logo du site" />
+            <img class="logo" src="{{ asset('build/logo.svg') }}" alt="Logo du site" />
         </a>
         <li class="nav-item">
             <a class="nav-link" href="{{ path('home') }}">Accueil</a>

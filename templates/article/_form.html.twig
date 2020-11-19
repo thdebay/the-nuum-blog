@@ -1,4 +1,11 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    
+    {{ form_row(form.titre) }}
+    {{ form_row(form.slug, {'help': 'Si vous laissez vide, un slug sera généré automatiquement'}) }}
+    {{ form_row(form.contenu) }}
+    {{ form_row(form.featured_image, {'label': 'Image (doit être une URL accessible sur internet)'}) }}
+    {{ form_row(form.categories) }}
+    {{ form_row(form.motCles) }}
+
     <button class="d-inline btn btn-primary">{{ button_label|default('Publier') }}</button>
 {{ form_end(form) }}

@@ -21,10 +21,12 @@
                     <div class="my-custom-class-for-errors">
                         {{ form_errors(form) }}
                     </div>
-                    {{ form_widget(form) }}
+
+                    {{ form_row(form.pseudo) }}
+                    
+                    {{ form_row(form.contenu) }}
                     <input type="hidden" name="article_id" value="{{ article.id }}">
-                    <button class="btn btn-primary float-right" type="submit">Valider</button>
-                {{ form_end(form) }}
+                    <button class="btn btn-primary float-right" type="submit">Poster le commentaire</button>
             </div>
         </div>
     </div>

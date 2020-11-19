@@ -26,6 +26,7 @@ class MotCle
 
     /**
      * @ORM\ManyToMany(targetEntity=Article::class, inversedBy="motCles")
+     * @ORM\JoinTable(name="article_mot_cle")
      */
     private $articles;
 

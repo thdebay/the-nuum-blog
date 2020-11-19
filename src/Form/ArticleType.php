@@ -16,7 +16,9 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('slug')
+            ->add('slug', null, [
+                'required'   => false,
+            ])
             ->add('contenu')
             ->add('featured_image')
             ->add('categories', EntityType::class, [

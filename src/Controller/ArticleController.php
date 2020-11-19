@@ -49,6 +49,11 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // si le slug est vide, on le génère à partir du titre
+            if (!$article->getSlug()) {
+                $article->setSlug(strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $article->getTitre()))));
+            }
+            
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
             $entityManager->flush();
