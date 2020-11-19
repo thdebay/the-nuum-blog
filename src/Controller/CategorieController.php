@@ -62,6 +62,7 @@ class CategorieController extends AbstractController
         // on utilise le même template que dans la page d'accueil mais on lui passe les articles de la catégorie seulement
         return $this->render('home.html.twig', [
             'articles' => $categorie->getArticles(),
+            'content_filter' => $categorie->getNom(), // pour afficher quelle catégorie on visualise
         ]);
     }
 

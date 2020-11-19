@@ -1,5 +1,5 @@
 <div>
 {% for motCle in article.getMotCles %}
-    <span class="text-secondary">#{{ motCle.getMotCle }}</span>
+    <span class="text-secondary"><a href="{{ path('mot_cle_show', {'id': motCle.id}) }}">#{{ motCle.getMotCle }}</a></span>
 {% endfor %}
 </div>

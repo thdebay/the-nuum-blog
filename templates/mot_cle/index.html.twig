@@ -17,19 +17,25 @@
         {% for mot_cle in mot_cles %}
             <tr>
                 <td>{{ mot_cle.id }}</td>
-                <td>{{ mot_cle.motCle }}</td>
                 <td>
-                    <a href="{{ path('mot_cle_show', {'id': mot_cle.id}) }}">show</a>
-                    <a href="{{ path('mot_cle_edit', {'id': mot_cle.id}) }}">edit</a>
+                    {# si la catégorie contient des articles, ajouter un lien #}
+                    {% if mot_cle.getArticles().count() %}
+                        <a href="{{ path('mot_cle_show', {'id': mot_cle.id}) }}">
+                    {% endif %}
+                        {{ mot_cle.motCle }}
+                    {% if mot_cle.getArticles().count() %}</a>{% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('mot_cle_edit', {'id': mot_cle.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Aucun mot-clé trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('mot_cle_new') }}">Create new</a>
+    <a class="btn btn-primary" href="{{ path('mot_cle_new') }}">Créer un mot-clé</a>
 {% endblock %}

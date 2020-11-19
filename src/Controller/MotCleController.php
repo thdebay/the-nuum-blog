@@ -59,8 +59,10 @@ class MotCleController extends AbstractController
      */
     public function show(MotCle $motCle): Response
     {
-        return $this->render('mot_cle/show.html.twig', [
-            'mot_cle' => $motCle,
+        // on utilise le même template que dans la page d'accueil mais on lui passe les articles de la catégorie seulement
+        return $this->render('home.html.twig', [
+            'articles' => $motCle->getArticles(),
+            'content_filter' => $motCle->getMotCle(), // pour afficher quel mot-clé on visualise
         ]);
     }
 

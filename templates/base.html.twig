@@ -9,10 +9,10 @@
     </head>
     <body>
     {% include "navbar.html.twig" %}
-    <div class="container p-4">
+    <div class="container p-4" id="app">
         {% block body %}{% endblock %}
     </div>
-    <script src="{{ asset('build/app.js') }}"></script>
+    {{ encore_entry_script_tags('app') }}
     {% block javascripts %}{% endblock %}
     </body>
 </html>

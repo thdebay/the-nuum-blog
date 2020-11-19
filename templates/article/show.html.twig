@@ -8,9 +8,9 @@
     <div class="col-sm-12">
         <div class="card">
             {% if article.featuredImage %}
-                <img src="{{ path('articles/') }}" class="card-img-top post-image" alt="Image illustrative">
+                <img src="{{ article.getFeaturedImage }}" class="card-img-top post-image" alt="Image illustrative">
             {% else %}
-                <img src="{{ "https://picsum.photos/seed/#{article.slug}/1200" }}" class="card-img-top  post-image" alt="Une image au hasard">
+                <img src="{{ "https://picsum.photos/seed/#{article.slug}/1200" }}" class="card-img-top post-image" alt="Une image au hasard">
             {% endif %}
             <div class="card-body">
                 <h1 class="card-title">{{ article.titre }}</h1>
@@ -29,6 +29,10 @@
         </div>
     </div>
 </div>
+
+<!-- Section des commentaires -->
+{% include "article/_comments.html.twig" %}
+
 <div class="row justify-content-center">
     <div class="column">
         <a href="{{ path('home') }}">Retour à l'accueil</a>

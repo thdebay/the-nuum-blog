@@ -1,0 +1,31 @@
+<div class="row comments pt-4">
+    <div class="col-sm-12">
+        <h3>Commentaires à propos de l'article <span class="font-italic">{{ article.titre }}</span></h3>
+        
+        {% for commentaire in article.getCommentaires() %}
+            <div class="card mt-4">
+                <div class="card-header">{{ commentaire.pseudo }}, {{ commentaire.createdAt }}</div>
+                <div class="card-body">
+                    {{ commentaire.contenu }}
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="card border-primary mt-4">
+            <div class="card-header">
+            Nouveau commentaire
+            </div>
+
+            <div class="card-body">
+                {{ form_start(form) }}
+                    <div class="my-custom-class-for-errors">
+                        {{ form_errors(form) }}
+                    </div>
+                    {{ form_widget(form) }}
+                    <input type="hidden" name="article_id" value="{{ article.id }}">
+                    <button class="btn btn-primary float-right" type="submit">Valider</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>

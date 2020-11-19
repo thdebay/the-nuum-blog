@@ -58,20 +58,24 @@ class Article
 
     /**
      * @ORM\ManyToMany(targetEntity=Categorie::class)
-     * @ORM\JoinTable(name="categorie_article")
      */
     private $categories;
 
     /**
      * @ORM\ManyToMany(targetEntity=MotCle::class)
-     * @ORM\JoinTable(name="mot_cle_article")
      */
     private $motCles;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="article", orphanRemoval=true)
+     */
+    private $commentaires;
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->motCles = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -214,6 +218,36 @@ class Article
     {
         if ($this->motCles->removeElement($motCle)) {
             $motCle->removeArticle($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commentaire[]
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): self
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires[] = $commentaire;
+            $commentaire->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): self
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getArticle() === $this) {
+                $commentaire->setArticle(null);
+            }
         }
 
         return $this;

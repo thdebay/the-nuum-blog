@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Repository\CategorieRepository;
+use App\Form\CommentaireType;
+use App\Entity\Commentaire;
 
 /**
  * @Route("/article")
@@ -65,8 +67,12 @@ class ArticleController extends AbstractController
      */
     public function show(Article $article): Response
     {
+        $commentaire = new Commentaire;
+        $form = $this->createForm(CommentaireType::class, $commentaire);
+
         return $this->render('article/show.html.twig', [
             'article' => $article,
+            'form' => $form->createView(),
         ]);
     }
 
