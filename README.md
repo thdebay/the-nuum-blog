@@ -5,7 +5,7 @@ This is an educational project made for demonstration purposes.
 
 Git clone or download zip and extract it.
 
-Create a .env file with at least the database settings
+Create a .env file with at least the database settings ; for instance
 
 `DATABASE_URL="mysql://user:password@127.0.0.1:3306/yourdatabasename?serverVersion=8.0"`
 
