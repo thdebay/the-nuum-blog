@@ -3,20 +3,36 @@
 {% block title %}The Nuum Blog - {{ article.titre }}{% endblock %}
 
 {% block body %}
-    <h1>{{ article.titre }}</h1>
-    <p>Publié le {{ article.createdAt }}
 
-    {# Si l'article a été mis à jour par la suite, l'afficher #}
-    {% if article.updatedAt and article.createdAt != article.updatedAt %}
-    (mis à jour le {{ article.updatedAt }})
-    {% endif %}
+<div class="row post">
+    <div class="col-sm-12">
+        <div class="card">
+            {% if article.featuredImage %}
+                <img src="{{ path('articles/') }}" class="card-img-top post-image" alt="Image illustrative">
+            {% else %}
+                <img src="{{ "https://picsum.photos/seed/#{article.slug}/1200" }}" class="card-img-top  post-image" alt="Une image au hasard">
+            {% endif %}
+            <div class="card-body">
+                <h1 class="card-title">{{ article.titre }}</h1>
+                {% include "article/_categories.html.twig" %}
+                {% include "article/_mots_cles.html.twig" %}
+                <p class="card-subtitle mb-2 mt-2 text-muted">Publié le {{ article.createdAt }}
+                {# Si l'article a été mis à jour par la suite, l'afficher #}
+                {% if article.updatedAt and article.createdAt != article.updatedAt %}
+                (mis à jour le {{ article.updatedAt }})
+                {% endif %}
+                
+                par <strong>{{ article.user.name }}</strong></p>
 
-    par {{ article.user.name }}
-    
-    
-    <p>{{ article.contenu }}</p>
-
-
-    <a href="{{ path('home') }}">Retour à l'accueil</a>
+                <p class="card-text">{{ article.contenu | nl2br }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="column">
+        <a href="{{ path('home') }}">Retour à l'accueil</a>
+    </div>
+</div>
 
 {% endblock %}

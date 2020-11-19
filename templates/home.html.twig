@@ -16,19 +16,23 @@
     {% endif %}
 </div>
 
-<div class="row">
+<div class="row home">
 
 {% for article in articles %}
 <div class="col-md-4 mt-4">
-    <div class="card" style="max-width: 18em;">
+    <div class="card">
         {% if article.featuredImage %}
-            <img src="{{ path('articles/') }}" class="card-img-top" alt="Image illustrative">
+            <img src="{{ path('articles/') }}" class="card-img-top post-image" alt="Image illustrative">
         {% else %}
-            <img src="{{ "https://picsum.photos/seed/#{article.slug}/200" }}" class="card-img-top" alt="Une image au hasard">
+            <img src="{{ "https://picsum.photos/seed/#{article.slug}/600" }}" class="card-img-top post-image" alt="Une image au hasard">
         {% endif %}
         <div class="card-body">
             <h5 class="card-title">{{ article.titre }}</h5>
-            <p>Publié le {{ article.createdAt }} par {{ article.user.name }}</p>
+            {% include "article/_categories.html.twig" %}
+            {% include "article/_mots_cles.html.twig" %}
+            <p class="card-subtitle mb-2 mt-2 text-muted">Publié le {{ article.createdAt }} par {{ article.user.name }}</p>
+        </div>
+        <div class="card-footer text-center">
             <a href="{{ path('article_show', {'id': article.id}) }}" class="btn btn-primary">Lire</a>
         </div>
     </div>

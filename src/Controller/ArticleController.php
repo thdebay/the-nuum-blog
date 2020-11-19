@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
+use App\Repository\CategorieRepository;
 
 /**
  * @Route("/article")
@@ -21,6 +22,9 @@ class ArticleController extends AbstractController
      */
     public function index(): Response
     {
+        // Cette méthode est réservée aux utilisateurs authentifiés
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        
         return $this->render('article/index.html.twig', [
             'articles' => $this->getUser()->getArticles(),
         ]);
@@ -31,6 +35,9 @@ class ArticleController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        // Cette méthode est réservée aux utilisateurs authentifiés
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        
         $article = new Article();
         
         // associer l'utilisateur courant au nouvel article
@@ -66,8 +73,11 @@ class ArticleController extends AbstractController
     /**
      * @Route("/{id}/edit", name="article_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Article $article): Response
+    public function edit(Request $request, Article $article, CategorieRepository $categorieRepository): Response
     {
+        // Cette méthode est réservée aux utilisateurs authentifiés
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
@@ -80,6 +90,7 @@ class ArticleController extends AbstractController
         return $this->render('article/edit.html.twig', [
             'article' => $article,
             'form' => $form->createView(),
+            'categories' => $categorieRepository->findAll(),
         ]);
     }
 
@@ -88,6 +99,9 @@ class ArticleController extends AbstractController
      */
     public function delete(Request $request, Article $article): Response
     {
+        // Cette méthode est réservée aux utilisateurs authentifiés
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($article);

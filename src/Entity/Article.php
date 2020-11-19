@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Carbon\Carbon;
 
@@ -55,9 +57,22 @@ class Article
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="article")
+     * @ORM\ManyToMany(targetEntity=Categorie::class)
+     * @ORM\JoinTable(name="categorie_article")
      */
-    private $categorie;
+    private $categories;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=MotCle::class)
+     * @ORM\JoinTable(name="mot_cle_article")
+     */
+    private $motCles;
+
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+        $this->motCles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -149,14 +164,57 @@ class Article
         return $this;
     }
 
-    public function getCategorie(): ?Categorie
+    /**
+     * @return Collection|Categorie[]
+     */
+    public function getCategories(): Collection
     {
-        return $this->categorie;
+        return $this->categories;
     }
 
-    public function setCategorie(?Categorie $categorie): self
+    public function addCategory(Categorie $category): self
     {
-        $this->categorie = $categorie;
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->addArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Categorie $category): self
+    {
+        if ($this->categories->removeElement($category)) {
+            $category->removeArticle($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|MotCle[]
+     */
+    public function getMotCles(): Collection
+    {
+        return $this->motCles;
+    }
+
+    public function addMotCle(MotCle $motCle): self
+    {
+        dd('adding motcle');
+        if (!$this->motCles->contains($motCle)) {
+            $this->motCles[] = $motCle;
+            $motCle->addArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMotCle(MotCle $motCle): self
+    {
+        if ($this->motCles->removeElement($motCle)) {
+            $motCle->removeArticle($this);
+        }
 
         return $this;
     }
