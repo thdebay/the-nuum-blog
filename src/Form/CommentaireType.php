@@ -21,16 +21,16 @@ class CommentaireType extends AbstractType
         $this->router = $router;
         $this->security = $security;
     }
-    
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $user = $this->security->getUser();
         $builder
-            ->add('pseudo', TextType::class, array(
-                'data' =>  $user ? $user->getName() : null,
+            ->add('pseudo', TextType::class, [
+                'data' => $user ? $user->getName() : null,
                 'disabled' => $user ? true : false,
-            ))
-            ->add('contenu', TextareaType::class, array('data_class' => null))
+            ])
+            ->add('contenu', TextareaType::class, ['data_class' => null])
             ->setAction($this->router->generate('save_comment'))
         ;
     }

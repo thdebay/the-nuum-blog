@@ -17,17 +17,17 @@ class ArticleType extends AbstractType
         $builder
             ->add('titre')
             ->add('slug', null, [
-                'required'   => false,
+                'required' => false,
             ])
             ->add('contenu')
             ->add('featured_image')
             ->add('categories', EntityType::class, [
                 // looks for choices from this entity
                 'class' => Categorie::class,
-            
+
                 // uses the User.username property as the visible option string
                 'choice_label' => 'nom',
-            
+
                 // used to render a select box, check boxes or radios
                 'multiple' => true,
                 'expanded' => true,
@@ -35,15 +35,14 @@ class ArticleType extends AbstractType
             ->add('motCles', EntityType::class, [
                 // looks for choices from this entity
                 'class' => MotCle::class,
-            
+
                 // uses the User.username property as the visible option string
                 'choice_label' => 'mot_cle',
-            
+
                 // used to render a select box, check boxes or radios
                 'multiple' => true,
                 'expanded' => true,
             ]);
-        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -4,12 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Form\ArticleType;
-use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\User;
 use App\Repository\CategorieRepository;
 use App\Form\CommentaireType;
 use App\Entity\Commentaire;
@@ -26,7 +24,7 @@ class ArticleController extends AbstractController
     {
         // Cette méthode est réservée aux utilisateurs authentifiés
         $this->denyAccessUnlessGranted('ROLE_USER');
-        
+
         return $this->render('article/index.html.twig', [
             'articles' => $this->getUser()->getArticles(),
         ]);
@@ -39,9 +37,9 @@ class ArticleController extends AbstractController
     {
         // Cette méthode est réservée aux utilisateurs authentifiés
         $this->denyAccessUnlessGranted('ROLE_USER');
-        
+
         $article = new Article();
-        
+
         // associer l'utilisateur courant au nouvel article
         $article->setUser($this->getUser());
 
@@ -53,7 +51,7 @@ class ArticleController extends AbstractController
             if (!$article->getSlug()) {
                 $article->setSlug(strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $article->getTitre()))));
             }
-            
+
             $article->setCreatedAt(new \DateTime());
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -74,7 +72,7 @@ class ArticleController extends AbstractController
      */
     public function show(Article $article): Response
     {
-        $commentaire = new Commentaire;
+        $commentaire = new Commentaire();
         $form = $this->createForm(CommentaireType::class, $commentaire);
 
         return $this->render('article/show.html.twig', [
@@ -95,7 +93,6 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $article->setUpdatedAt(new \DateTime());
             $this->getDoctrine()->getManager()->flush();
 

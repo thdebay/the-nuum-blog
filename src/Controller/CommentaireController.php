@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
-use App\Form\CommentaireType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Commentaire;
 use Doctrine\ORM\EntityManagerInterface;
