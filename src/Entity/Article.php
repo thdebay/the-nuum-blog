@@ -210,7 +210,6 @@ class Article
 
     public function addMotCle(MotCle $motCle): self
     {
-        dd('adding motcle');
         if (!$this->motCles->contains($motCle)) {
             $this->motCles[] = $motCle;
             $motCle->addArticle($this);
