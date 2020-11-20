@@ -17,11 +17,11 @@ composer install
 ```
 
 Run the migrations:
-`doctrine:migrations:migrate`
+`php bin/console doctrine:migrations:migrate`
 
-It is highly advised to seed the database with some data to get started:
+Seed the database with some data to get started:
 
-(TODO)
+`php bin/console doctrine:fixtures:load`
 
 
 You'll also need to install dependencies (Boostrap) and compile assets - this includes some static files:
