@@ -1,5 +1,5 @@
 <div>
-{% for categorie in article.getcategories %}
+{% for categorie in article.getCategories() %}
     <a href="{{ path('categorie_show', {'id': categorie.id}) }}"><span class="badge badge-warning">{{ categorie.nom }}</span></a>
 {% endfor %}
 </div>

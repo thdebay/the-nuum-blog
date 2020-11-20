@@ -51,22 +51,26 @@ class Article
     private $updated_at;
 
     /**
+     * un article est possédé par un utilisateur
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Categorie::class)
+     * un article appartient à une catégorie
+     * @ORM\ManyToMany(targetEntity=Categorie::class, inversedBy="categories")
      */
     private $categories;
 
     /**
+     * un article appartient à un mot-clé
      * @ORM\ManyToMany(targetEntity=MotCle::class)
      */
     private $motCles;
 
     /**
+     * un article possède plusieurs commentaires
      * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="article", orphanRemoval=true)
      */
     private $commentaires;

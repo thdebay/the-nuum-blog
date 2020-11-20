@@ -30,8 +30,8 @@ class Categorie
     private $slug;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Article::class, inversedBy="categories")
-     * @ORM\JoinTable(name="article_categorie")
+     * une catégorie possède plusieurs articles.
+     * @ORM\ManyToMany(targetEntity=Article::class, mappedBy="categories")
      */
     private $articles;
 

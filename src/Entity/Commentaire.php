@@ -19,6 +19,7 @@ class Commentaire
     private $id;
 
     /**
+     * un commentaire appartient à un article
      * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="commentaires")
      * @ORM\JoinColumn(nullable=false)
      */

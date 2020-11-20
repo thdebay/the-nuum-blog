@@ -25,8 +25,8 @@ class MotCle
     private $mot_cle;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Article::class, inversedBy="motCles")
-     * @ORM\JoinTable(name="article_mot_cle")
+     * un mot-clé possède plusieurs articles
+     * @ORM\ManyToMany(targetEntity=Article::class, mappedBy="motCles")
      */
     private $articles;
 
