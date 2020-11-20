@@ -25,7 +25,8 @@ class MotCle
     private $mot_cle;
 
     /**
-     * un mot-clé possède plusieurs articles
+     * un mot-clé possède plusieurs articles.
+     *
      * @ORM\ManyToMany(targetEntity=Article::class, mappedBy="motCles")
      */
     private $articles;
