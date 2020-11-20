@@ -54,6 +54,8 @@ class ArticleController extends AbstractController
                 $article->setSlug(strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $article->getTitre()))));
             }
             
+            $article->setCreatedAt(new \DateTime());
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
             $entityManager->flush();
@@ -93,6 +95,8 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $article->setUpdatedAt(new \DateTime());
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('article_index');

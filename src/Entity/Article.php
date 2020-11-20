@@ -144,9 +144,10 @@ class Article
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): string
     {
-        return $this->updated_at;
+        // on définit le format d'affichage de la date pour retourner une chaine de caractères directement
+        return Carbon::parse($this->updated_at)->locale('fr')->isoFormat('dddd Do MMMM YYYY à hh\hmm');
     }
 
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
