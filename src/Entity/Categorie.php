@@ -31,6 +31,7 @@ class Categorie
 
     /**
      * une catégorie possède plusieurs articles.
+     *
      * @ORM\ManyToMany(targetEntity=Article::class, mappedBy="categories")
      */
     private $articles;

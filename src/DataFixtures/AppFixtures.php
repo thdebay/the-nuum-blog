@@ -1,9 +1,10 @@
 <?php
+
 namespace App\DataFixtures;
+
 use App\Entity\Article;
 use App\Entity\User;
 use Faker;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Commentaire;
@@ -12,8 +13,8 @@ use App\Entity\MotCle;
 
 class AppFixtures extends Fixture
 {
-    public function load(ObjectManager $manager) {
-
+    public function load(ObjectManager $manager)
+    {
         $faker = Faker\Factory::create('fr_FR');
 
         $author = new User();
@@ -42,7 +43,7 @@ class AppFixtures extends Fixture
         $manager->flush();
 
         // créer quelques articles
-        for ($i = 0; $i < 2; $i++) {
+        for ($i = 0; $i < 2; ++$i) {
             $article = new Article();
             $article->setTitre($faker->sentence($nbWords = 6, $variableNbWords = true));
             $article->setSlug($faker->word());
@@ -54,9 +55,8 @@ class AppFixtures extends Fixture
             $manager->persist($article);
             $manager->flush();
         }
-        
 
-        for ($i = 0; $i < 2; $i++) {
+        for ($i = 0; $i < 2; ++$i) {
             $article = new Article();
             $article->setTitre($faker->sentence($nbWords = 6, $variableNbWords = true));
             $article->setSlug($faker->word());
@@ -68,7 +68,7 @@ class AppFixtures extends Fixture
             $manager->flush();
 
             // et des commentaires associés
-            for ($i=0; $i < 2; $i++) {
+            for ($i = 0; $i < 2; ++$i) {
                 $commentaire = new Commentaire();
                 $commentaire->setPseudo($faker->name())
                 ->setContenu($faker->sentence($nbWords = 24, $variableNbWords = true))
@@ -77,9 +77,6 @@ class AppFixtures extends Fixture
                 $manager->persist($commentaire);
                 $manager->flush();
             }
-
         }
-
-
     }
 }
