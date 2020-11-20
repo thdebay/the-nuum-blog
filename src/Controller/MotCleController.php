@@ -96,7 +96,7 @@ class MotCleController extends AbstractController
     {
         // Cette méthode est réservée aux utilisateurs authentifiés
         $this->denyAccessUnlessGranted('ROLE_USER');
-        
+
         if ($this->isCsrfTokenValid('delete'.$motCle->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($motCle);

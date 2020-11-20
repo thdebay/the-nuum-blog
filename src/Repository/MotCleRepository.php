@@ -18,6 +18,4 @@ class MotCleRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, MotCle::class);
     }
-
-    //
 }
